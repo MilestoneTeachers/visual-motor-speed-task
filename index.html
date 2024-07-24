@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visual Motor Speed Task</title>
+    <style>
+        #square {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="square"></div>
+    <script>
+        let startTime;
+        let square = document.getElementById("square");
+
+        function getRandomPosition() {
+            let x = Math.floor(Math.random() * (window.innerWidth - 50));
+            let y = Math.floor(Math.random() * (window.innerHeight - 50));
+            return [x, y];
+        }
+
+        function showSquare() {
+            let [x, y] = getRandomPosition();
+            square.style.left = `${x}px`;
+            square.style.top = `${y}px`;
+            startTime = new Date().getTime();
+            square.style.display = "block";
+        }
+
+        square.addEventListener("click", function() {
+            let endTime = new Date().getTime();
+            let reactionTime = endTime - startTime;
+            square.style.display = "none";
+            // Display reaction time and provide instructions
+            alert(`Your reaction time is ${reactionTime} ms. Please enter this value in the form.`);
+            // Redirect to JotForm (optional, if you want to redirect them automatically)
+            // window.location.href = `https://form.jotform.com/YOUR_FORM_LINK?reaction_time=${reactionTime}`;
+        });
+
+        setTimeout(showSquare, 2000);  // Show square after 2 seconds
+    </script>
+</body>
+</html>
